@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // TODO: PASTE YOUR NEW RENDER API URL HERE (no trailing slash).
-const String apiBaseUrl = 'PASTE_YOUR_RENDER_API_URL_HERE';
+const String apiBaseUrl = 'https://africa-unemployment-api.onrender.com';
 
 enum FieldKind { number, text }
 
@@ -181,6 +181,40 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class AppBackground extends StatelessWidget {
+  const AppBackground({required this.child, super.key});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xFFE6F0F7), Color(0xFFF6F1E7)],
+            ),
+          ),
+        ),
+        Center(
+          child: Opacity(
+            opacity: 0.12,
+            child: Image.asset(
+              'assets/images/africa_map.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+}
+
 class PredictionPage extends StatefulWidget {
   const PredictionPage({super.key});
 
@@ -292,7 +326,9 @@ class _PredictionPageState extends State<PredictionPage> {
         keyboardType: field.keyboardType,
         decoration: InputDecoration(
           labelText: field.label,
-          border: const OutlineInputBorder(),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         ),
       ),
     );
@@ -302,42 +338,44 @@ class _PredictionPageState extends State<PredictionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Africa Unemployment Predictor')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (final field in appFields) _buildTextField(field),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _isLoading ? null : _predict,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
+      body: AppBackground(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (final field in appFields) _buildTextField(field),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _isLoading ? null : _predict,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: _isLoading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Predict', style: TextStyle(fontSize: 16)),
               ),
-              child: _isLoading
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Text('Predict', style: TextStyle(fontSize: 16)),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(8),
+              const SizedBox(height: 20),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.9),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  _resultText.isEmpty
+                      ? 'Prediction result will appear here.'
+                      : _resultText,
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
-              child: Text(
-                _resultText.isEmpty
-                    ? 'Prediction result will appear here.'
-                    : _resultText,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

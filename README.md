@@ -7,8 +7,7 @@ The WDI download requests all 54 African countries for 1991-2024. The cleaned da
 Source: [World Bank World Development Indicators](https://databank.worldbank.org/source/world-development-indicators).
 
 ## Public Swagger UI link
-PASTE_YOUR_RENDER_API_URL_HERE/docs
-(replace with your Render link, ending in /docs)
+https://africa-unemployment-api.onrender.com/docs
 
 ## YouTube video demo link
 (Placeholder: add the YouTube demo URL.)

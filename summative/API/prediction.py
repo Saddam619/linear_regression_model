@@ -100,7 +100,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         # TODO: REPLACE WITH YOUR NEW RENDER URL (no trailing slash)
-        "PASTE_YOUR_RENDER_API_URL_HERE",
+        "https://africa-unemployment-api.onrender.com",
         "http://localhost:8080",
         "http://127.0.0.1:8080",
         "http://localhost:5000",
