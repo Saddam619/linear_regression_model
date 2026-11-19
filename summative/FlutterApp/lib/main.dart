@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// TODO: PASTE YOUR NEW RENDER API URL HERE (no trailing slash).
 const String apiBaseUrl = 'https://africa-unemployment-api.onrender.com';
 
 enum FieldKind { number, text }
