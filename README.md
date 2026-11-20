@@ -11,7 +11,7 @@ Source: [World Bank World Development Indicators](https://databank.worldbank.org
 https://africa-unemployment-api.onrender.com/docs
 
 ## YouTube video demo link
-(Placeholder: add the YouTube demo URL.)
+[Watch the video demo](https://youtu.be/abP2q3BGUak?si=NjUP6BwrXAs5Ma6n).
 
 ## How to run the mobile app
 1. Install [Flutter](https://docs.flutter.dev/get-started/install). For Android, also install Android Studio. For iOS, use a Mac with Xcode.
